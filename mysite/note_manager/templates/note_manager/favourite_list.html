@@ -1,0 +1,24 @@
+{% extends 'note_manager/base.html' %}
+
+{% block content %}
+
+{% for note in favourite_notes %}
+<h1>{{ note.note_header |safe}}</h1>
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+<br>
+{{note.note_body|safe}}
+<br>
+Made by {{note.user}}
+<br>
+{{note.pub_date}}
+<br>
+<form method="post" action="">
+    {% csrf_token %}
+    <input type="checkbox" name="option" value="{{note.id}}"><Br>
+    I'm sure I want to delete this note from favourites
+    <p><input type="submit" value="remove"></p>
+</form>
+
+{% endfor %}
+
+{% endblock %}

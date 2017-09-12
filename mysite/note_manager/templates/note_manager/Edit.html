@@ -1,0 +1,23 @@
+{% extends 'note_manager/base.html' %}
+
+{% block content %}
+
+<form action="" method="post">
+    {% csrf_token %}
+    <label for="aheader">Header: </label>
+    <input id="aheader" type="text" name="aheader" value="{{note.note_header}}">
+    <br>
+    <br>
+    <label for="body">Body: </label>
+    <input id="body" type="text" name="body" value="{{note.note_body}}">
+    <br>
+    <br>
+    <label for="tag">Tag: </label>
+    <input id="tag" type="text" name="tag" value="{{note.category}}">
+    <input type="submit" value="Submit"/>
+</form>
+<br>
+
+{% endblock %}
+
+

@@ -1,0 +1,35 @@
+{% extends 'note_manager/base.html' %}
+
+{% block menu %}
+
+
+<li><a href="/note_manager">Homepage</a></li>
+
+<li><a href="/note_manager/search">Search</a></li>
+
+{% if request.user.is_authenticated %}
+<li><a href="/note_manager/add">Add note</a></li>
+
+{% else %}
+<li><a href="/note_manager/login">Add note</a></li>
+
+{% endif %}
+<li id="first" class="active"><a href="/note_manager/contact">Contact Us</a></li>
+
+{% endblock %}
+
+{% block content %}
+<!-- Primary content start -->
+
+Timur Yakupov
+<br>
+Telegram: @Timmagg
+<br>
+Phone number: +7(917)378-68-88
+<br>
+Mail: T.Yakupov@innopolis.ru
+
+
+<!-- Primary content end -->
+
+{% endblock %}

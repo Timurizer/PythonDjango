@@ -1,0 +1,40 @@
+{% extends 'note_manager/base.html' %}
+
+{% block content %}
+
+<!-- Primary content start -->
+
+<h2>Login</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+</form>
+
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+    $("#id_username").change(function () {
+      var username = $(this).val();
+
+      $.ajax({
+        url: 'ajax/find_username/',
+        data: {
+          'username': username
+        },
+        dataType: 'json',
+        success: function (data) {
+          if (data.is_taken) {
+            alert("Username not found.");
+          }
+        }
+      });
+
+    });
+
+
+</script>
+{% endblock %}
+

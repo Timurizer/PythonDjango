@@ -1,0 +1,34 @@
+{% extends 'note_manager/base.html' %}
+
+{% block content %}
+
+<h1>{{ note.note_header |safe}}</h1>
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+<br>
+{{note.note_body|safe}}
+<br>
+Made by {{note.user}}
+<br>
+{{note.pub_date}}
+{% if user.is_authenticated %}
+<br>
+<a href="add_favourite">Add to favourite</a>
+<br>
+{% endif %}
+{% if request.user.id == note.user.id %}
+
+<br>
+<form method="get" action="edit">
+    <button type="submit">Edit</button>
+</form>
+
+<form action="" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Delete"/>
+</form>
+
+{% endif %}
+
+
+{% endblock %}
+

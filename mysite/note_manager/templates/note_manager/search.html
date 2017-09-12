@@ -1,0 +1,47 @@
+{% extends 'note_manager/base.html' %}
+
+{% block menu %}
+
+<li><a href="/note_manager">Homepage</a></li>
+
+<li id="first" class="active"><a href="/note_manager/search">Search</a></li>
+
+{% if request.user.is_authenticated %}
+<li><a href="/note_manager/add">Add note</a></li>
+
+{% else %}
+<li><a href="/note_manager/login">Add note</a></li>
+
+{% endif %}
+<li><a href="/note_manager/contact">Contact Us</a></li>
+
+{% endblock %}
+
+{% block content %}
+<!--Sort by: <a href="searchdate">By Date</a>     <a href="searchcreator">By Creator</a>     <a href="searchhead">By Header</a>
+          <br> -->
+
+<form action="" method="get">
+    {% csrf_token %}
+    <label for="tosearch">Search: </label>
+    <input id="tosearch" type="text" name="tosearch" value="">
+    <input type="submit" value="Submit"/>
+</form>
+
+<!-- Primary content start -->
+
+{% for note in notes %}
+<h4>
+    <li><a href="{% url 'note_manager:detail' note.id %}">{{ note.note_header |safe}}</a></li>
+</h4>
+{{ note.note_body |safe }}
+<!-- {{note.note_body}} -->
+<br>
+Made by {{note.user}}
+<br>
+{{note.pub_date}}
+<br>
+<br>
+{% endfor %}
+{% endblock %}
+

@@ -1,0 +1,60 @@
+{% extends 'note_manager/base.html' %}
+
+{% block menu %}
+
+
+<li id="first" class="active"><a href="/note_manager">Homepage</a></li>
+
+<li><a href="/note_manager/search">Search</a></li>
+
+{% if request.user.is_authenticated %}
+<li><a href="/note_manager/add">Add note</a></li>
+
+{% else %}
+<li><a href="/note_manager/login">Add note</a></li>
+
+{% endif %}
+<li><a href="/note_manager/contact">Contact Us</a></li>
+
+{% endblock %}
+
+{% block content %}
+
+Sort by: <a href="/note_manager">By Date</a> <a href="/note_manager/user">By Creator</a>
+<a href="/note_manager/note_header">By Header</a> <a href="/note_manager/category">By Tag</a>
+<br>
+<br>
+
+<!-- Primary content start -->
+
+{% if latest_note_list %}
+<ul>
+    {% for note in latest_note_list %}
+    <h4>
+        <li><a href="{% url 'note_manager:detail' note.id %}">{{ note.note_header |safe}}</a></li>
+    </h4>
+    {{note.note_body | safe}}
+    <br>
+    Made by {{note.user}}
+    <br>
+    Tag: {{note.category}}
+    <br>
+    {{note.pub_date}}
+    <br>
+    <br>
+    <br>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No notes are available.</p>
+{% endif %}
+
+{% if request.user.is_authenticated %}
+<li><a href="add">Add note</a></li>
+
+{% endif %}
+
+
+<!-- Primary content end -->
+
+{% endblock %}

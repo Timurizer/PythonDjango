@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+{% load static %}
+
+<!--
+
+Design by TEMPLATED
+http://templated.co
+Released for free under the Creative Commons Attribution License
+
+Name       : Primitive
+Version    : 1.0
+Released   : 20080425
+
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <title>Note Manager</title>
+    <link href="{% static 'note_manager/style.css' %}" rel="stylesheet" type="text/css" media="screen"/>
+</head>
+
+<body>
+
+<div id="header">
+
+    <h1>Note Manager</h1>
+    <h2>By Timur Yakupov</h2>
+
+</div>
+
+<div id="menu">
+
+    <ul>
+
+        <!--
+                Each list item below represents a tab in the menu. Set the class
+                of any list item to 'active' to make it, well, active.
+        -->
+        {% block menu %}
+
+
+        <li><a href="/note_manager">Homepage</a></li>
+
+        <li><a href="/note_manager/search">Search</a></li>
+
+        {% if request.user.is_authenticated %}
+        <li><a href="/note_manager/add">Add note</a></li>
+
+        {% else %}
+        <li><a href="/note_manager/login">Add note</a></li>
+
+        {% endif %}
+        <li><a href="/note_manager/contact">Contact Us</a></li>
+
+        {% endblock %}
+    </ul>
+
+    <div></div>
+
+</div>
+
+
+<div id="container">
+
+    <div id="primarycontainer">
+        <div id="primarycontent">
+
+            {% block content %}
+            {% endblock %}
+
+
+            <!-- Primary content end -->
+
+        </div>
+    </div>
+
+    <div id="secondarycontent">
+
+        <!-- Secondary content start -->
+
+        <h4>{% if request.user.is_authenticated %}Welcome '{{ request.user.username }}'
+            <br>
+            <a href="/note_manager/logout">Logout</a>
+            <br>
+            <a href="/note_manager/favourite_list/">Favourite</a>
+
+            <br>
+
+            {% else %}
+            <a href="/note_manager/login">Login</a>
+            <br>
+            <a href="/note_manager/signup">Signup</a>
+
+            {% endif %}
+        </h4>
+
+
+        <ul>
+            <!--It's time to make a note -->
+        </ul>
+
+        <!-- Secondary content end -->
+
+    </div>
+
+    <div class="clearit"></div>
+
+</div>
+
+<div id="footer">
+    &copy; My Website. Template made by <a href="http://templated.co" rel="nofollow">TEMPLATED</a>.
+</div>
+
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script src="{% static 'js/app.js' %}"></script>
+{% block javascript %}{% endblock %}
+
+
+</body>
+</html>
