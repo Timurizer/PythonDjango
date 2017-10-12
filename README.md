@@ -1,1 +1,1 @@
-# Test_Task_Yakupov
+# Python + Django
